@@ -13,7 +13,7 @@ class PipelineFinder(BaseStorageFinder):
     storage = staticfiles_storage
 
     def find(self, path, all=False):
-        if not settings.PIPELINE_ENABLED:
+        if settings.PIPELINE_ENABLED:
             return super(PipelineFinder, self).find(path, all)
         else:
             return []
