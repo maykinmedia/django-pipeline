@@ -70,7 +70,7 @@ class GZIPMixin(object):
                 if not matches_patterns(path, self.gzip_patterns):
                     continue
                 original_file = self.open(path)
-                gzipped_path = f"{path}.gz"
+                gzipped_path = "{}.gz".format(path)
                 if self.exists(gzipped_path):
                     self.delete(gzipped_path)
                 gzipped_file = self._compress(original_file)

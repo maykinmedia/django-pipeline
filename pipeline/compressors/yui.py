@@ -6,7 +6,7 @@ class YUICompressor(SubProcessCompressor):
     def compress_common(self, content, compress_type, arguments):
         command = (
             settings.YUI_BINARY,
-            f"--type={compress_type}",
+            "--type={}".format(compress_type),
             arguments
         )
         return self.execute_command(command, content)

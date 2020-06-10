@@ -128,7 +128,7 @@ class SubProcessCompiler(CompilerBase):
             if compiling.returncode != 0:
                 stdout_captured = None  # Don't save erroneous result.
                 raise CompilerError(
-                    f"{argument_list!r} exit code {compiling.returncode}\n{stderr}",
+                    "{} exit code {}\n{}".format(argument_list, compiling.returncode, stderr),
                     command=argument_list,
                     error_output=stderr)
 

@@ -78,7 +78,7 @@ class Compressor(object):
         elif variant == "datauri":
             return self.with_data_uri(css)
         else:
-            raise CompressorError(f"\"{variant}\" is not a valid variant")
+            raise CompressorError("\"{}\" is not a valid variant".format(variant))
 
     def compile_templates(self, paths):
         compiled = []
@@ -129,10 +129,10 @@ class Compressor(object):
                 quote = match.group(1) or ''
                 asset_path = match.group(2)
                 if NON_REWRITABLE_URL.match(asset_path):
-                    return f"url({quote}{asset_path}{quote})"
+                    return "url({}{}{})".format(quote, asset_path, quote)
                 asset_url = self.construct_asset_path(asset_path, path,
                                                       output_filename, variant)
-                return f"url({asset_url})"
+                return "url({})".format(asset_url)
             content = self.read_text(path)
             # content needs to be unicode to avoid explosions with non-ascii chars
             content = re.sub(URL_DETECTOR, reconstruct, content)
@@ -175,7 +175,7 @@ class Compressor(object):
             path = match.group(1)
             mime_type = self.mime_type(path)
             data = self.encoded_content(path)
-            return f"url(\"data:{mime_type};charset=utf-8;base64,{data}\")"
+            return "url(\"data:{};charset=utf-8;base64,{}\")".format(mime_type, data)
         return re.sub(URL_REPLACER, datauri, css)
 
     def encoded_content(self, path):

@@ -107,7 +107,7 @@ class Packager(object):
     def pack(self, package, compress, signal, **kwargs):
         output_filename = package.output_filename
         if self.verbose:
-            print(f"Saving: {output_filename}")
+            print("Saving: {}".format(output_filename))
         paths = self.compile(
             package.paths,
             compiler_options=package.compiler_options,
